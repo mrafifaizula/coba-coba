@@ -1,4 +1,6 @@
 <?php
+use App\Models\Siswa;
+use App\Models\Film;
 
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +19,46 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// router basic
-Route::get('/about', function () {
-    return '<h1>Halo</h1>'
-    . 'Selamat datang di webapp saya<br>'
-    . 'Te kuattt laparr hayang baso di sanguannn.';
+Route::get('/halaman2', function () {
+    return view('animals');
 });
 
-// router baisc  passing data to view
-Route::get('animals', function () {
-    $king = "lion";
-    $hewan = ['monkey', 'dragonfly', 'tiger', 'butterfly', 'crocodile'];
-    return view('animals_page', compact('king', 'hewan'));
+Route::get('/halaman3', function () {
+    return view('fruits');
 });
+
+Route::get('/about', function () {
+    $nama = "Rafi faizul";
+    $jk = "laki-laki";
+    $pt = "SMK";
+    $pe = "Mahasiswa";
+    return view('biodata', compact('nama','jk','pt','pe'));
+});
+
+Route::get('/sample/{nama}', function (Request $request, $nama) {
+    $nama2 = $nama;
+    return view('sample', compact('nama2'));
+});
+Route::get('siswa', function () {
+    return view('siswa');
+});
+Route::get('sakola', function () {
+    return view('siswa');
+});
+
+Route::get('album', function () {
+    return view('AlbumMusik');
+});
+
+Route::get('film', function () {
+    return view('film');
+});
+
+Route::get('film/{id}', function(int $id) {
+    return view('detail-film', ['film' => Film::findorfail($id)]); 
+});
+
+
+
+
+
